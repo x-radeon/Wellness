@@ -1,0 +1,55 @@
+﻿<div class="col-md-4 col-md-offset-4">
+    <div class="text-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
+    <wait-cursor display-when="vm.isBusy"></wait-cursor>
+    <div>
+        <div><a class="btn btn-sm btn-primary" href="#/">Go Back <i class="fa fa-long-arrow-left"></i></a></div>
+        <form novalidate name="newMetricForm" ng-submit="vm.addMetric()">
+            <div class="form-group">
+                <input id="id" name="id" hidden value="" />
+
+                <label>Created Date</label>
+                <input class="form-control" ng-model="vm.newMetric.created" id="created" name="created" required ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})\040(\d{2}):(\d{2})$/" />
+                <span class="text text-danger" ng-show="newMetricForm.arrival.$error.pattern">Created Date must be: MM/DD/YYYY HH:MM</span>
+                </div>
+            <div class="form-group">
+                <label>Clothes Weight</label>
+                <input class="form-control" ng-model="vm.newMetric.clothesWeight" id="clothesWeight" name="clothesWeight" required ng-pattern="/^(\d{1})$/" />
+                <span class="text text-danger" ng-show="newMetricForm.clothesWeight.$error.pattern">Clothes Weight must be a number: e.g. 2</span>
+            </div>
+            <div class="form-group">
+                <label>Weight</label>
+                <input class="form-control" ng-model="vm.newMetric.weight" id="weight" name="weight" required ng-pattern="/^(\d{1,3})\.(\d{1})$/" />
+                <span class="text text-danger" ng-show="newMetricForm.weight.$error.pattern">Weight must be a number: e.g. 150.5</span>
+            </div>
+            <div class="form-group">
+                <label>Fat Mass</label>
+                <input class="form-control" ng-model="vm.newMetric.fatMass" id="fatMass" name="fatMass" required ng-pattern="/^(\d{1,3})\.(\d{1})$/" />
+                <span class="text text-danger" ng-show="newMetricForm.fatMass.$error.pattern">Fat Mass must be a number: e.g. 35.2</span>
+            </div>
+            <div class="form-group">
+                <label>Fat Free Mass (FFM)</label>
+                <input class="form-control" ng-model="vm.newMetric.fatFreeMass" id="fatFreeMass" name="fatFreeMass" required ng-pattern="/^(\d{1,3})\.(\d{1})$/" />
+                <span class="text text-danger" ng-show="newMetricForm.fatFreeMass.$error.pattern">FFM must be a number: e.g. 130.8</span>
+            </div>
+            <div class="form-group">
+                <label>Muscle Mass</label>
+                <input class="form-control" ng-model="vm.newMetric.muscleMass" id="muscleMass" name="muscleMass" required ng-pattern="/^(\d{1,3})\.(\d{1})$/" />
+                <span class="text text-danger" ng-show="newMetricForm.muscleMass.$error.pattern">Muscle Mass must be a number: e.g. 125.4</span>
+            </div>
+            <div class="form-group">
+                <label>Basal Metabolic Rate (BMR)</label>
+                <input class="form-control" ng-model="vm.newMetric.basalMetabolicRate" id="basalMetabolicRate" name="basalMetabolicRate" required ng-pattern="/^(\d{4})$/" />
+                <span class="text text-danger" ng-show="newMetricForm.basalMetabolicRate.$error.pattern">BMR must be a number: e.g. 2155</span>
+            </div>
+            <div class="form-group">
+                <label>Body Mass Index (BMI)</label>
+                <input class="form-control" ng-model="vm.newMetric.bodyMassIndex" id="bodyMassIndex" name="bodyMassIndex" required ng-pattern="/^(\d{1,3})\.(\d{1})$/" />
+                <span class="text text-danger" ng-show="newMetricForm.bodyMassIndex.$error.pattern">BMI must be a number: e.g. 21.2</span>
+            </div>
+            <div>
+                <input id="newMetricButton" type="submit" value="Add" class="btn btn-success" ng-disabled="newMetricForm.$invalid" />
+            </div>
+        </form>
+    </div>
+    <br />
+</div>

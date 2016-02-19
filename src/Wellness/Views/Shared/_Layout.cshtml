@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8"/>
+
+    <link href="data:image/x-icon,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8EZcfAAAAOVBMVEX/////Bwf/Bgb/Bgb/BgblBgb+Bgb/BgZsAgL/Bgb+Bgb+Bgb9Bgb+BQX/Bgb/BQX+Bwf/Bwf+Bga6UWOuAAAADHRSTlMAm2RMpzzpFBB2+ed1GA5GAAABN0lEQVQYle3ayW5CMRBFQTLPCeH/Pza77s2NBTIiz6TOErvt2iEjdrthN9VtNZ5I3VX31emnAAICAgJuHXiovqvDsHTdQ9X79lU65asCBAQEBFwR+Fgde2DqqTp2YhwgICAg4DrA04f3wz6rNAEICAgIeH3A8fB49aNKq4kKCAgICHh9wPHGBGzWmHA6sG8DBAQEBFwHmI5JrPP0XvVnSQAICAgIuA7wuToPMF2XSne8VICAgICA6wC78YH9h7NESKtpXz+4EjCyAAEBAQGXASZqXzzmz3Q0CxAQEBBwGWCibooFCAgICLgMcExND5/0VOp9Z2cBAgICAi4DTNT+MS3x+8F1ERYgICAg4DLA7rVq1oW/1sYBzgY4G+BsgLNtHti9VX8t+SXA2QBnA5wNcLbNAyVJ/7YfjvPdPsYTUoEAAAAASUVORK5CYII=" rel="icon" type="image/x-icon" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootswatch/yeti/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/lib/angular-xeditable/dist/css/xeditable.min.css" />
+    <link rel="stylesheet" href="~/lib/angular-chart.js/dist/angular-chart.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a asp-controller="App" asp-action="Index" class="btn btn-lg">
+                            <span class="text-danger"><i class="fa fa-heart"></i> Wellness</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="App" asp-action="Self" class="btn btn-lg btn-info">
+                            <i class="fa fa-user"></i> Personal
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="App" asp-action="Team" class="btn btn-lg btn-info">
+                            <i class="fa fa-users"></i> Team
+                        </a>
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a asp-controller="Auth" asp-action="Logout" class="btn btn-lg btn-danger">
+                                <i class="fa fa-sign-out"></i> Logout
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-controller="Auth" asp-action="Login" class="btn btn-lg btn-info">
+                                <i class="fa fa-sign-in"></i> Login
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="Auth" asp-action="Register" class="btn btn-lg btn-info">
+                                <i class="fa fa-user-plus"></i> Register
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+        <br />
+        <br />
+        <div id="footer" class="container-fluid">
+            <div class="navbar navbar-inverse navbar-fixed-bottom"><h4 class="text-center">All Users Total Weight Loss: TODO Lbs</h4></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>
