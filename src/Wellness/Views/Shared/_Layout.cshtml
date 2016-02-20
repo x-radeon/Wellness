@@ -24,18 +24,34 @@
                             <span class="text-danger"><i class="fa fa-heart"></i> Wellness</span>
                         </a>
                     </li>
-                    <li>
-                        <a asp-controller="App" asp-action="Self" class="btn btn-lg btn-info">
-                            <i class="fa fa-user"></i> Personal
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-controller="App" asp-action="Team" class="btn btn-lg btn-info">
-                            <i class="fa fa-users"></i> Team
-                        </a>
-                    </li>
+                    
                     @if (User.Identity.IsAuthenticated)
                     {
+                        <li>
+                            <a asp-controller="App" asp-action="Self" class="btn btn-lg btn-info">
+                                <i class="fa fa-user"></i> Personal
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="App" asp-action="Team" class="btn btn-lg btn-info">
+                                <i class="fa fa-users"></i> Teams
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="App" asp-action="Workouts" class="btn btn-lg btn-info">
+                                <i class="fa fa-calendar"></i> Workouts
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="App" asp-action="Excercises" class="btn btn-lg btn-info">
+                                <i class="fa fa-trophy"></i> Excercises
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="App" asp-action="Events" class="btn btn-lg btn-info">
+                                <i class="fa fa-birthday-cake"></i> Events
+                            </a>
+                        </li>
                         <li>
                             <a asp-controller="Auth" asp-action="Logout" class="btn btn-lg btn-danger">
                                 <i class="fa fa-sign-out"></i> Logout
@@ -65,7 +81,7 @@
         <br />
         <br />
         <div id="footer" class="container-fluid">
-            <div class="navbar navbar-inverse navbar-fixed-bottom"><h4 class="text-center">All Users Total Weight Loss: TODO Lbs</h4></div>
+            <div class="navbar navbar-inverse navbar-fixed-bottom"><h4 class="text-center">All Users Total Weight Loss: 10 Lbs</h4></div>
         </div>
     </div>
 

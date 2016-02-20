@@ -2,11 +2,19 @@
     ViewBag.Title = "Wellness Home";
 }
 @*<div class="alert alert-dismissible alert-success">
-    <button type="button" class="close" data-dismiss="alert">x</button>
-    <strong>Well done!</strong><br/> You successfully lost 5 pounds this month! <i class="fa fa-smile-o"></i>
-</div>*@
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Well done!</strong><br/> You successfully lost 5 pounds this month! <i class="fa fa-smile-o"></i>
+    </div>*@
 <div class="jumbotron">
     <h1><span class="text-danger"><i class="fa fa-heart"></i> Wellness</span> Home</h1>
-    <p>This site allows you to track your weight loss</p>
-    <p>Please login or create a new user account</p>
+    <p>A website to manage and track weight loss, find and join teams, and track workouts</p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>Hit up one of the tabs! Get moving! :D</p>
+    }
+    else
+    {
+        <p>Please login or create a new user account</p>
+    }
+    
 </div>

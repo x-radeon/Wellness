@@ -85,7 +85,7 @@ namespace Wellness.Models
         {
             return _context.UserMetrics
                 .Where(t => t.UserName == name)
-                .OrderBy(t => t.Created)
+                .OrderByDescending(t => t.Created)
                 .ToList();
         }
 

@@ -1,8 +1,23 @@
 ﻿<div class="col-md-6 col-md-offset-3">
     <div class="text-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
     <wait-cursor display-when="vm.isBusy"></wait-cursor>
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert"><i class="fa fa-check"></i></button>
+        <i class="fa fa-thumbs-up"></i> <strong>Well done!</strong> You've been losing weight, keep up the great work!
+    </div>
+
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert"><i class="fa fa-check"></i></button>
+        <i class="fa fa-exclamation-triangle"></i> <strong>Hmm.</strong> Looks like you haven't been working out lately, <a href="" class="text-primary">need some motivation?</a>
+    </div>
+
+    <div class="alert alert-dismissible alert-info">
+        <button type="button" class="close" data-dismiss="alert"><i class="fa fa-check"></i></button>
+        <i class="fa fa-exclamation-circle"></i> <strong>No new data.</strong> It's been a while, go weigh yo self!
+    </div>
+
     <h2>Self</h2>
-    <div class="well text-center">
+    <div class="text-center">
         <table class="table table-striped table-responsive">
             <tr>
                 <th>Name</th>
@@ -24,12 +39,18 @@
             </tr>
         </table>
     </div>
-    
+
     <div class="text-center"><a ng-href="#/metric" class="btn btn-lg bg-success">Add New Reading</a></div>
 
-    <canvas id="line" class="chart chart-line" chart-data="data"
-            chart-labels="labels" chart-legend="true" chart-series="series"
-            chart-click="onClick"></canvas> 
+
+    <input class="btn btn-lg btn-info" value="Weight Graph" ng-click="vm.toggleWeightChart()" type="button" />
+    <canvas id="baseWeight" chart-type="weightChartType" class="chart-base" chart-series="weightChartSeries" chart-data="weightChartData" chart-labels="weightChartLabels" chart-legend="true"></canvas>
+
+    <input class="btn btn-lg btn-info" value="Muscle vs Fat vs Bone" ng-click="vm.toggleMFBChart()" type="button" />
+    <canvas id="baseMFB" chart-type="MFBChartType" class="chart-base" chart-series="MFBChartSeries" chart-data="MFBChartData" chart-labels="MFBChartLabels" chart-legend="true"></canvas>
+
+    <input class="btn btn-lg btn-info" value="BMR" ng-click="vm.toggleBMRChart()" type="button" />
+    <canvas id="baseBMR" chart-type="BMRChartType" class="chart-base" chart-series="BMRChartSeries" chart-data="BMRChartData" chart-labels="BMRChartLabels" chart-legend="true"></canvas>
 
     <h2>Metrics</h2>
     <p>(Line editable)</p>
