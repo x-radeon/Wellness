@@ -1,37 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Serialization;
 using Wellness.Models;
 using Wellness.ViewModels;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Authentication.Cookies;
-using System.Net;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace Wellness
 {
     public class Startup
     {
         public static IConfigurationRoot Configuration;
+        public static string connectionString;
 
-        public Startup(IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment appEnv)
         {
             var builder = new ConfigurationBuilder()
-              .SetBasePath(appEnv.ApplicationBasePath)
-              .AddJsonFile("config.json")
+              .SetBasePath(appEnv.ContentRootPath)
+              .AddJsonFile("appsettings.json")
               .AddEnvironmentVariables();
-
+            
             Configuration = builder.Build();
+
+            connectionString = $"{Configuration["ConnectionString"]}";
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -49,6 +44,7 @@ namespace Wellness
             {
                 config.User.RequireUniqueEmail = true;
                 config.Password.RequiredLength = 8;
+                /*
                 config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login";
                 config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
                 {
@@ -66,27 +62,23 @@ namespace Wellness
 
                         return Task.FromResult(0);
                     }
-                };
+                };*/
             })
             .AddEntityFrameworkStores<WellnessContext>();
-
+            
             services.AddLogging();
 
-            services.AddEntityFramework()
-              .AddSqlServer()
-              .AddDbContext<WellnessContext>();
+            services.AddDbContext<WellnessContext>(options =>
+                options.UseSqlite("Data Source=.\\data.sqlite"));
 
-            services.AddTransient<WellnessContextSeedData>();
             services.AddScoped<IWellnessRepository, WellnessRepository>();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, WellnessContextSeedData seeder, ILoggerFactory loggerFactory, IHostingEnvironment enviroment)
+        public async void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostingEnvironment enviroment)
         {
-            app.UseIISPlatformHandler();
             app.UseStaticFiles();
-            app.UseIdentity();
             app.UseDeveloperExceptionPage();
 
             Mapper.Initialize(config =>
@@ -104,11 +96,6 @@ namespace Wellness
                     defaults: new { controller = "App", action = "Index" }
                     );
             });
-
-            await seeder.EnsureSeedDataAsync();
         }
-
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

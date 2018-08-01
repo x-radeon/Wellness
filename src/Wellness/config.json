@@ -1,8 +1,0 @@
-﻿{
-  "AppSettings": {
-    "SiteEmailAddress": "wellness@xradeon.com"
-  },
-  "Data": {
-    "ConnectionString": "Server=(localdb)\\ProjectsV12;Database=Wellness;Trusted_Connection=true;MultipleActiveResultSets=true;"
-  }
-}

@@ -1,14 +1,15 @@
 ﻿using System;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Wellness.Models
 {
     public class WellnessContext : IdentityDbContext<WellnessUser>
     {
-        public WellnessContext()
+        public WellnessContext(DbContextOptions<WellnessContext> options)
+            : base(options)
         {
-            Database.EnsureCreated();
         }
 
         public DbSet<Excercise> Excercises { get; set; }
@@ -19,14 +20,5 @@ namespace Wellness.Models
         public DbSet<WellnessUserExcerciseMetric> UserExcercieMetrics { get; set; }
         public DbSet<WellnessUserMetric> UserMetrics { get; set; }
         public DbSet<WellnessUserWorkout> UserWorkouts { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var connectionString = Startup.Configuration["Data:ConnectionString"];
-
-            optionsBuilder.UseSqlServer(connectionString);
-
-            base.OnConfiguring(optionsBuilder);
-        }
     }
 }
